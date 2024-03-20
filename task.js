@@ -1,12 +1,11 @@
 class Task {
-    constructor(id, description, status) {
-        this.id = id;
+    constructor(description, status) {
         this.description = description;
         this.status = status;
     }
 
     toString() {
-        return `Task ${this.id}: ${this.description} (${this.status})`;
+        return `Task ${this.description} (${this.status})`;
     }
 }
 

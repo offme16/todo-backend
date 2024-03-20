@@ -6,16 +6,6 @@ class TaskManager {
         this.tasks = [];
     }
 
-    // loadTasks(filename) {
-    //     try {
-    //         const data = fs.readFileSync(filename, 'utf8');
-    //         const tasksArray = JSON.parse(data);
-    //         this.tasks = tasksArray.map(task => new Task(task.id, task.description, task.status));
-    //     } catch (err) {
-    //         console.error('Ошибка', err);
-    //     }
-    // }
-
     loadTask(){
         fs.readFile('tasks.json','utf8',(err,data)=>{
             if(err){
@@ -46,7 +36,7 @@ class TaskManager {
     }
 
     addTask(id, description, status) {
-        const newTask = new Task(id, description, status);
+        const newTask = new Task(description, status);
         this.tasks.push(newTask);
         this.saveTasks('tasks.json');
     }
