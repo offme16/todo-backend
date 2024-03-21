@@ -1,7 +1,6 @@
-POST http://localhost:5000/tasks
+DELETE  http://localhost:5000/tasks
 Content-Type: application/json
 
 {
-    "description": "v",
-    "status": "v"
+    "ids": ["65fb205d4cea47112cc596f8","65fb205a4cea47112cc596f6"]
 }

@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const taskSchema = new mongoose.Schema({
-    description: String,
+    title: String,
     status: String
 });
 

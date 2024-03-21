@@ -2,10 +2,11 @@ import 'dotenv/config';
 import express from 'express';
 import mongoose from 'mongoose';
 import  {validateTaskData}  from './middlewares/validateTaskData.js';
-
+import cors from 'cors';
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 const PORT = process.env.PORT || 3001;
 
@@ -23,14 +24,12 @@ mongoose.connect(mongoUri)
     .catch(err => console.error('MongoDB connection error:', err));
 
 export const taskSchema = new mongoose.Schema({
-    description: String,
+    title: String,
     status: String
 });
 export const TaskModel = mongoose.model('Task', taskSchema);
 
-
-
-    //controller
+    //controllers
 app.get('/tasks',async(req,res)=>{
     try{
         const tasks = await TaskModel.find();
@@ -52,14 +51,13 @@ app.post('/tasks', validateTaskData, async(req, res) => {
 });
 
 
-app.delete('/tasks/:id', async (req, res) => {
-    const id = req.params.id;
+app.delete('/tasks/del', async (req, res) => {
+    const ids = req.body.id;
     try {
-        const task = await TaskModel.findById(id);
-        if (!task) {
-            return res.status(404).send('Задача не найдена'); 
+        const result = await TaskModel.deleteMany({ _id: { $in: ids } });
+        if (result.deletedCount === 0) {
+            return res.status(404).send('Задачи не найдены'); 
         }
-        await TaskModel.deleteOne({ _id: id });
         res.status(204).send();
     } catch (err) {
         res.status(400).send(err.message);
