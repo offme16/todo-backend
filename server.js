@@ -52,15 +52,15 @@ app.post('/tasks', validateTaskData, async(req, res) => {
 
 
 app.delete('/tasks/del', async (req, res) => {
-    const ids = req.body.id;
+    const ids = req.body;
     try {
-        const result = await TaskModel.deleteMany({ _id: { $in: ids } });
-        if (result.deletedCount === 0) {
-            return res.status(404).send('Задачи не найдены'); 
-        }
-        res.status(204).send();
+      const result = await TaskModel.deleteMany({ _id: { $in: ids } });
+      if (result.deletedCount === 0) {
+        return res.status(404).send('Задачи не найдены');
+      }
+      res.status(204).send();  
     } catch (err) {
-        res.status(400).send(err.message);
+      res.status(400).send(err.message);
     }
 });
 

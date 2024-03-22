@@ -1,6 +1,6 @@
-DELETE  http://localhost:5000/tasks
+DELETE  http://localhost:5000/tasks/del
 Content-Type: application/json
 
 {
-    "ids": ["65fb205d4cea47112cc596f8","65fb205a4cea47112cc596f6"]
+    "ids": ["65fc72d8bf577026ccdd5276"]
 }
